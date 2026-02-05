@@ -7,4 +7,4 @@ import './js/hero.js';
 import './js/modal.js';
 import './js/api.js';
 import './js/render-functions.js';
-
+import './js/loader.js';
