@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { showPush } from './pushMessage';
+import { showPush } from './notification-service';
 
 axios.defaults.baseURL = 'https://sound-wave.b.goit.study/api';
 
