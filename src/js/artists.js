@@ -13,11 +13,11 @@ let artists = [];
 let totalArtists = 0;
 
 function showLoadMoreBtn() {
-  loadMore.classList.remove('hidden');
+  loadMore.classList.remove('is-hidden');
 }
 
 function hideLoadMoreBtn() {
-  loadMore.classList.add('hidden');
+  loadMore.classList.add('is-hidden');
 }
 
 async function loadArtists() {
