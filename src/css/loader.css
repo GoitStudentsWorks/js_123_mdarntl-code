@@ -8,10 +8,6 @@
   z-index: 9999;
 }
 
-.hidden {
-  display: none;
-}
-
 .loader {
   color: #ffffff;
   font-size: 45px;
