@@ -1,0 +1,215 @@
+.artist-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.artist-modal {
+    background: #060307;
+    width: 100%;
+    max-width: 335px; /* Mobile */
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+}
+
+/.modal-close-btn {
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    padding: 0;
+}
+
+.modal-close-icon {
+    width: 16px;  
+    height: 16px;
+    display: block;
+    fill: #fff; 
+
+}
+
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+    .artist-modal { max-width: 704px; padding: 40px; }
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {
+    .artist-modal { max-width: 900px; }
+}
+
+/* Центрування заголовка */
+.modal-artist-title {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+/* Сітка інфо-блоку */
+.artist-info-grid {
+    display: grid;
+    /* ПО ЗАМОВЧУВАННЮ (Мобільні): одна колонка */
+    grid-template-columns: 1fr; 
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* TABLET & DESKTOP: тут вмикаємо дві колонки */
+/* @media screen and (min-width: 768px) {
+    .artist-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 24px;
+    }
+} */
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    display: block;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    text-transform: capitalize; /* Робить першу літеру великою */
+    margin-bottom: 4px;
+}
+
+.info-value {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+}
+/* Біографія */
+.modal-bio {
+    margin-bottom: 24px;
+}
+
+.modal-bio p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Жанри (теги) */
+.modal-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.genre-tag {
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 12px;
+    color: #fff;
+    background: transparent;
+}
+
+/* Контейнер для списку альбомів */
+.modal-albums-section {
+    margin-top: 24px;
+}
+
+.modal-album-item {
+    background: rgba(255, 255, 255, 0.03); /* Темний фон картки альбому */
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.modal-album-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+/* Шапка таблиці */
+.track-header {
+    display: grid;
+    /* Назва забирає весь вільний простір, час 60px, лінк 40px */
+    grid-template-columns: 1fr 60px 40px; 
+    gap: 12px;
+    padding: 8px 12px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Рядок треку */
+.track-item {
+    display: grid;
+    grid-template-columns: 1fr 60px 40px;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #fff;
+}
+
+/* "Зебра" як на макеті */
+.track-item:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+/* Час треку */
+.track-duration {
+    color: rgba(255, 255, 255, 0.6);
+    text-align: right;
+}
+
+/* Колонка з лінком */
+.track-link {
+    display: flex;
+    justify-content: flex-end; /* Іконка притиснута до правого краю */
+    align-items: center;
+}
+
+/* Сама кнопка-посилання */
+.yt-link {
+    display: flex;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 0;
+}
+
+/* Іконка зі спрайту */
+.yt-icon {
+    width: 24px;
+    height: 24px;
+    fill: #ffffff; /* Робимо її білою */
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.yt-link:hover .yt-icon {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
