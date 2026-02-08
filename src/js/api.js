@@ -1,33 +1,42 @@
 import axios from 'axios';
+import { showPush } from './pushMessage';
 
-// Базовий URL для API
 axios.defaults.baseURL = 'https://sound-wave.b.goit.study/api';
 
-// Отримати список артистів, 
-// потрібно передати номер сторінки і кількість артистів на сторінку
-export function getArtists({ page = 1, limit }) {
-  return axios.get('/artists', {
-    params: { page, limit },
-  });
+/**
+ * Внутрішній "двигун" (Private engine)
+ * Обробляє запити, лоадери та помилки в одному місці.
+ */
+async function apiRequest(method, url, config = {}) {
+  try {
+    const response = await axios({ method, url, ...config });
+    return response.data; // Повертаємо чисті дані
+  } catch (error) {
+    const message = error.response?.data?.message || error.message;
+    showPush(message);
+    return null; 
+  }
 }
 
-// Отримати одного артиста за ID, 
-// потрібно передати ID артиста
-export function getArtistById(id) {
-  return axios.get(`/artists/${id}`);
-}
+/**
+ * Експортуємо функції ТАК САМО, як вони називалися раніше.
+ * Логіка виклику в компонентах не зміниться.
+ */
 
-// Отримати альбоми артиста за ID,
-// потрібно передати ID артиста
-export function getArtistAlbums(id) {
-  return axios.get(`/artists/${id}/albums`);
-}
+export const getGenres = () => 
+  apiRequest('get', '/genres');
 
+export const getArtists = ({ page = 1, limit }) => 
+  apiRequest('get', '/artists', { params: { page, limit } });
 
-// Отримати відгуки,
-// потрібно передати кількість відгуків
-export function getFeedbacks(limit) {
-  return axios.get('/feedbacks', {
-    params: { limit },
-  });
-}
+export const getArtistById = (id) => 
+  apiRequest('get', `/artists/${id}`);
+
+export const getArtistAlbums = (id) => 
+  apiRequest('get', `/artists/${id}/albums`);
+
+export const getFeedbacks = (limit) => 
+  apiRequest('get', '/feedbacks', { params: { limit } });
+
+export const postFeedback = (data) => 
+  apiRequest('post', '/feedbacks', { data });

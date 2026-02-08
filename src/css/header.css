@@ -8,14 +8,15 @@
   background: none;
   width: 48px;
   height: 48px;
+  box-shadow: none;
 }
 
 .header-menu {
-  display: none; /* або opacity: 0; */
+  display: none;
 }
 
 .header-menu.is-open {
-  display: block; /* або opacity: 1; */
+  display: block;
 }
 
 .header-overlay-link {
