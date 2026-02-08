@@ -3,7 +3,7 @@
     position: relative;
     isolation: isolate;
     width: 100%;
-    padding: 0;
+    padding-top: 64px;
     background: linear-gradient(0deg, #06030700 0%, #23132b 10%, #23132B 20%, #23132B 80%, #23132baf 90%, #060307 100%);
     overflow: hidden;
 }
@@ -246,10 +246,7 @@
 
 /* table */
 @media (min-width: 768px) and (max-width: 1439px) {
-    .hero {
-        padding: 50px 0 50px 0;
-    }
-
+   
     .hero-container {
         gap: 30px;
     }
@@ -268,6 +265,7 @@
         font-size: 48px;
         line-height: 52.8px;
         letter-spacing: -0.48px;
+        padding-top: 64px;
     }
 
     .hero-text {
@@ -317,7 +315,6 @@
 /* desctop */
 @media (min-width: 1440px) {
     .hero {
-        padding: 60px 0 0 0;
         min-height: 100vh;
     }
 
@@ -332,7 +329,6 @@
     .hero-content {
         width: 664px;
         max-width: 664px;
-        padding: 0;
         flex-shrink: 0;
     }
 
