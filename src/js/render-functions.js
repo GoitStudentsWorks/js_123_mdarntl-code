@@ -40,3 +40,77 @@ export function renderArtistCards(artists) {
 
   artistsList.insertAdjacentHTML('beforeend', markup);
 }
+
+// Функція для створення списку альбомів та треків
+export function createAlbumsMarkup(albums) {
+  if (albums.length === 0) return '<p class="no-data">No tracks found</p>';
+
+  return albums.map(album => `
+    <div class="artistModal-album-item">
+      <h4 class="artistModal-album-name">${album.strAlbum}</h4>
+      <div class="artistModal-track-header">
+        <span>Track</span>
+        <span>Time</span>
+        <span>Link</span>
+      </div>
+      <ul class="artistModal-track-list">
+        ${album.tracks.map(track => {
+          const totalSec = Math.floor(track.intDuration / 1000);
+          const m = Math.floor(totalSec / 60);
+          const s = String(totalSec % 60).padStart(2, '0');
+          const cleanLink = track.movie ? track.movie.split(' ')[0] : null;
+          
+          return `
+            <li class="artistModal-track-item">
+              <span class="artistModal-track-name">${track.strTrack}</span>
+              <span class="artistModal-track-duration">${m}:${s}</span>
+              <span class="artistModal-track-link">
+                ${cleanLink && cleanLink !== "null" ? `
+                  <a href="${cleanLink}" target="_blank" class="artistModal-yt-link" rel="noopener noreferrer">
+                    <svg class="artistModal-yt-icon" width="24" height="24">
+                      <use href="./img/sprite.svg#icon-Youtube"></use> 
+                    </svg>
+                  </a>` : ''}
+              </span>
+            </li>`;
+        }).join('')}
+      </ul>
+    </div>`).join('');
+}
+
+// Функція рендеру модалки
+export function createArtistModalMarkup({ artist, yearsActive, specificInfoMarkup, albumsMarkup }) {
+  const { strArtist, strArtistThumb, strCountry, strBiographyEN, genres } = artist;
+  
+  return `
+    <div class="artistModal-content-wrapper">
+      <h2 class="artistModal-title">${strArtist}</h2>
+      <div class="artistModal-info-wrapper">
+        <div class="artistModal-img-wrapper">
+          <img src="${strArtistThumb}" class="artistModal-img" alt="${strArtist}">
+        </div>
+        <div class="artistModal-info-grid">
+          <div class="artistModal-info-group">
+            <div class="artistModal-info-item">
+              <span class="artistModal-info-label">Years active</span>
+              <p class="artistModal-info-value">${yearsActive}</p>
+            </div>     
+            ${specificInfoMarkup}      
+            <div class="artistModal-info-item">
+              <span class="artistModal-info-label">Country</span>
+              <p class="artistModal-info-value">${strCountry || 'Unknown'}</p>
+            </div>
+          </div>
+          <div class="artistModal-desc">
+            <span class="artistModal-info-label">Biography</span>
+            <p>${strBiographyEN || 'Biography not available'}</p>
+          </div>
+          <div class="artistModal-genres">
+            ${(genres || []).map(g => `<span class="artist-genre">${g}</span>`).join('')}
+          </div>
+        </div> 
+      </div>
+      <h2 class="artistModal-albums-title">Albums</h2>
+      <div class="artistModal-albums-section">${albumsMarkup}</div>
+    </div>`;
+}

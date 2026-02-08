@@ -1,215 +1,314 @@
-.artist-modal-overlay {
+.artistModal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    padding: 64px 16px;
+    background: rgba(0, 0, 0, 0.25);
 }
 
-.artist-modal {
-    background: #060307;
-    width: 100%;
-    max-width: 335px; /* Mobile */
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: 16px;
-    padding: 24px;
+.artistModal {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 288px;
+    max-height: 100%;
+    border-radius: 16px;
+    background: #060307;
+    overflow: hidden;
 }
 
-/.modal-close-btn {
-    border: none;
-    cursor: pointer;
+.artistModal::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1005;
+    width: 100%;
+    height: 52px;
+    border-radius: 16px 16px 0 0;
+    background: #060307;
+    content: "";
+    pointer-events: none;
+}
+
+.artistModal-close-btn {
     position: absolute;
     top: 16px;
     right: 16px;
-    width: 32px;
-    height: 32px;
-    background: transparent;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1001;
+    width: 32px;
+    height: 32px;
     padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
 }
 
-.modal-close-icon {
-    width: 16px;  
-    height: 16px;
+.artistModal-close-icon {
     display: block;
-    fill: #fff; 
-
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+    background: #060307;
 }
 
-
-/* Tablet */
-@media screen and (min-width: 768px) {
-    .artist-modal { max-width: 704px; padding: 40px; }
+.artistModal-content {
+    flex-grow: 1;
+    height: 100%;
+    padding: 52px 8px;
+    overflow-y: auto;
 }
 
-/* Desktop */
-@media screen and (min-width: 1440px) {
-    .artist-modal { max-width: 900px; }
-}
-
-/* Центрування заголовка */
-.modal-artist-title {
-    font-size: 18px;
-    font-weight: 600;
+.artistModal-title {
+    margin: 0 0 16px 0;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.3;
     text-align: center;
-    margin-bottom: 16px;
-    color: #fff;
+    letter-spacing: -0.01em;
 }
 
-/* Сітка інфо-блоку */
-.artist-info-grid {
+.artistModal-img {
+    width: 100%;
+    height: 177px;
+    margin-bottom: 32px;
+    border-radius: 16px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.artistModal-info-grid {
     display: grid;
-    /* ПО ЗАМОВЧУВАННЮ (Мобільні): одна колонка */
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
     gap: 16px;
-    margin-bottom: 24px;
 }
 
-/* TABLET & DESKTOP: тут вмикаємо дві колонки */
-/* @media screen and (min-width: 768px) {
-    .artist-info-grid {
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 24px;
-    }
-} */
-
-.info-item {
+.artistModal-info-group {
     display: flex;
     flex-direction: column;
+    gap: 16px;
 }
 
-.info-label {
+.artistModal-info-label {
     display: block;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 14px;
-    text-transform: capitalize; /* Робить першу літеру великою */
-    margin-bottom: 4px;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.5;
+    text-transform: capitalize;
 }
 
-.info-value {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-}
-/* Біографія */
-.modal-bio {
-    margin-bottom: 24px;
-}
-
-.modal-bio p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 14px;
+.artistModal-info-value, 
+.artistModal-desc p {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
     line-height: 1.5;
 }
 
-/* Жанри (теги) */
-.modal-genres {
+.artistModal-genres {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 32px;
+    gap: 16px;
 }
 
-.genre-tag {
-    padding: 6px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    font-size: 12px;
-    color: #fff;
-    background: transparent;
+.artistModal-albums-title {
+    margin: 16px 0;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
 }
 
-/* Контейнер для списку альбомів */
-.modal-albums-section {
-    margin-top: 24px;
+.artistModal-albums-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    font-family: "IBM Plex Sans", sans-serif;
 }
 
-.modal-album-item {
-    background: rgba(255, 255, 255, 0.03); /* Темний фон картки альбому */
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 24px;
+.artistModal-album-item {
+    width: 100%;
+    max-width: 272px;
+    padding: 14px 11px;
+    border-radius: 16px;
+    background: #1e1c1f;
+    box-sizing: border-box;
 }
 
-.modal-album-name {
-    font-size: 18px;
+.artistModal-album-name {
+    margin-bottom: 12px;
     font-weight: 600;
-    margin-bottom: 16px;
+    font-size: 16px;
     color: #fff;
 }
 
-/* Шапка таблиці */
-.track-header {
+.artistModal-track-header {
     display: grid;
-    /* Назва забирає весь вільний простір, час 60px, лінк 40px */
-    grid-template-columns: 1fr 60px 40px; 
-    gap: 12px;
-    padding: 8px 12px;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-
-/* Рядок треку */
-.track-item {
-    display: grid;
-    grid-template-columns: 1fr 60px 40px;
-    gap: 12px;
+    grid-template-columns: 1fr 45px 32px; 
+    column-gap: 16px;
     align-items: center;
-    padding: 10px 12px;
-    font-size: 14px;
-    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 8px;
+    font-weight: 600;
 }
 
-/* "Зебра" як на макеті */
-.track-item:nth-child(even) {
-    background: rgba(255, 255, 255, 0.05);
+.artistModal-track-header span:nth-child(2),
+.artistModal-track-header span:nth-child(3) {
+   grid-column: span 1;
+   text-align: center;
+}
+
+.artistModal-track-header span:first-child,
+.artistModal-track-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.artistModal-track-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: 16px;
+    align-items: center;
+    min-width: 250px;
+    height: 40px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.artistModal-track-item:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
 }
 
-/* Час треку */
-.track-duration {
-    color: rgba(255, 255, 255, 0.6);
-    text-align: right;
+.artistModal-track-duration {
+    text-align: left; 
+    min-width: 40px;
 }
 
-/* Колонка з лінком */
-.track-link {
+.artistModal-track-link {
     display: flex;
-    justify-content: flex-end; /* Іконка притиснута до правого краю */
-    align-items: center;
+    justify-content: flex-end;
+    min-width: 24px;
 }
 
-/* Сама кнопка-посилання */
-.yt-link {
-    display: flex;
-    padding: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    line-height: 0;
-}
-
-/* Іконка зі спрайту */
-.yt-icon {
+.artistModal-yt-icon {
     width: 24px;
     height: 24px;
-    fill: #ffffff; /* Робимо її білою */
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    fill: #fff;
+    transition: transform 250ms ease;
 }
 
-.yt-link:hover .yt-icon {
-    transform: scale(1.1);
-    opacity: 0.8;
+
+@media only screen and (min-width: 768px) {
+    .artistModal-overlay { 
+        padding: 64px 32px; 
+    }
+
+    .artistModal { 
+        max-width: 702px; 
+    }
+
+    .artistModal::before { 
+        height: 64px; 
+    }
+    
+    .artistModal-content { 
+        padding: 64px 24px; 
+    }
+
+    .artistModal-title { 
+        margin: 0 0 48px 0; 
+        font-size: 32px; 
+    }
+
+    .artistModal-img { 
+        height: 402px; 
+    }
+
+    .artistModal-info-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .artistModal-info-group {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        column-gap: 24px;
+        row-gap: 24px;
+    }
+
+    .artistModal-albums-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 32px;
+        row-gap: 32px;
+    }
+
+    .artistModal-album-item { 
+        max-width: 100%; 
+        min-width: 272px; 
+    }
+
+    .artistModal-albums-title { 
+        margin: 48px 0 16px 0; 
+    }
+}
+
+
+@media only screen and (min-width: 1440px) {
+    .artistModal { 
+        max-width: 1312px; 
+    }
+
+    .artistModal-content { 
+        padding: 64px 64px; 
+    }
+
+    .artistModal-albums-section { grid-template-columns: repeat(4, 1fr); 
+    }
+
+    .artistModal-info-wrapper {
+        display: flex;
+        column-gap: 32px;
+        row-gap: 24px;
+        height: 375px;
+    }
+
+    .artistModal-img-wrapper { 
+        flex: 0 0 50%; height: 100%; 
+    }
+
+    .artistModal-img { 
+        height: 100%; margin-bottom: 0; 
+    }
+
+    .artistModal-info-grid { 
+        flex: 1; display: 
+        flex; flex-direction: column; 
+        height: 100%; 
+        min-width: 0; 
+    }
+
+    .artistModal-desc { 
+        flex-grow: 1; 
+        overflow-y: auto; 
+        min-height: 0; 
+    }
 }
