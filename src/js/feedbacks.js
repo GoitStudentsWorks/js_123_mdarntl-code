@@ -1,1 +1,1 @@
-console.log('feedbacks');
+console.log('feedback');
