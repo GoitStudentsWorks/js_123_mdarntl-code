@@ -16,14 +16,12 @@ function closeModal() {
 openBtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
 
-// клік по фону
 backdrop.addEventListener('click', event => {
   if (event.target === backdrop) {
     closeModal();
   }
 });
 
-// Escape
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && !backdrop.classList.contains('is-hidden')) {
     closeModal();
@@ -57,7 +55,7 @@ function highlightStars(value) {
   });
 }
 
-form.addEventListener('submit', e => {
+form.addEventListener('submit', async e => {
   e.preventDefault();
 
   const name = form.elements.name.value.trim();
@@ -70,14 +68,18 @@ form.addEventListener('submit', e => {
 
   errorText.hidden = true;
 
-  console.log({
+  const feedbackData = {
     name,
     message,
     rating: selectedRating,
-  });
-});
+  };
 
-form.addEventListener('input', () => {
-    errorText.hidden = true;
-  });
-  
+  try {
+    await postFeedback(feedbackData);
+  } finally {
+    form.reset();
+    selectedRating = 0;
+    highlightStars(0);
+    closeModal();
+  }
+});
