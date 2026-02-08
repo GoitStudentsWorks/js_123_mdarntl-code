@@ -1,0 +1,314 @@
+.artistModal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 64px 16px;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.artistModal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 288px;
+    max-height: 100%;
+    border-radius: 16px;
+    background: #060307;
+    overflow: hidden;
+}
+
+.artistModal::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1005;
+    width: 100%;
+    height: 52px;
+    border-radius: 16px 16px 0 0;
+    background: #060307;
+    content: "";
+    pointer-events: none;
+}
+
+.artistModal-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+.artistModal-close-icon {
+    display: block;
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+    background: #060307;
+}
+
+.artistModal-content {
+    flex-grow: 1;
+    height: 100%;
+    padding: 52px 8px;
+    overflow-y: auto;
+}
+
+.artistModal-title {
+    margin: 0 0 16px 0;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.3;
+    text-align: center;
+    letter-spacing: -0.01em;
+}
+
+.artistModal-img {
+    width: 100%;
+    height: 177px;
+    margin-bottom: 32px;
+    border-radius: 16px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.artistModal-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.artistModal-info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.artistModal-info-label {
+    display: block;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.5;
+    text-transform: capitalize;
+}
+
+.artistModal-info-value, 
+.artistModal-desc p {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.artistModal-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.artistModal-albums-title {
+    margin: 16px 0;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.artistModal-albums-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+.artistModal-album-item {
+    width: 100%;
+    max-width: 272px;
+    padding: 14px 11px;
+    border-radius: 16px;
+    background: #1e1c1f;
+    box-sizing: border-box;
+}
+
+.artistModal-album-name {
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+}
+
+.artistModal-track-header {
+    display: grid;
+    grid-template-columns: 1fr 45px 32px; 
+    column-gap: 16px;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.artistModal-track-header span:nth-child(2),
+.artistModal-track-header span:nth-child(3) {
+   grid-column: span 1;
+   text-align: center;
+}
+
+.artistModal-track-header span:first-child,
+.artistModal-track-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.artistModal-track-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: 16px;
+    align-items: center;
+    min-width: 250px;
+    height: 40px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.artistModal-track-item:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.artistModal-track-duration {
+    text-align: left; 
+    min-width: 40px;
+}
+
+.artistModal-track-link {
+    display: flex;
+    justify-content: flex-end;
+    min-width: 24px;
+}
+
+.artistModal-yt-icon {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+    transition: transform 250ms ease;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .artistModal-overlay { 
+        padding: 64px 32px; 
+    }
+
+    .artistModal { 
+        max-width: 702px; 
+    }
+
+    .artistModal::before { 
+        height: 64px; 
+    }
+    
+    .artistModal-content { 
+        padding: 64px 24px; 
+    }
+
+    .artistModal-title { 
+        margin: 0 0 48px 0; 
+        font-size: 32px; 
+    }
+
+    .artistModal-img { 
+        height: 402px; 
+    }
+
+    .artistModal-info-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .artistModal-info-group {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        column-gap: 24px;
+        row-gap: 24px;
+    }
+
+    .artistModal-albums-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 32px;
+        row-gap: 32px;
+    }
+
+    .artistModal-album-item { 
+        max-width: 100%; 
+        min-width: 272px; 
+    }
+
+    .artistModal-albums-title { 
+        margin: 48px 0 16px 0; 
+    }
+}
+
+
+@media only screen and (min-width: 1440px) {
+    .artistModal { 
+        max-width: 1312px; 
+    }
+
+    .artistModal-content { 
+        padding: 64px 64px; 
+    }
+
+    .artistModal-albums-section { grid-template-columns: repeat(4, 1fr); 
+    }
+
+    .artistModal-info-wrapper {
+        display: flex;
+        column-gap: 32px;
+        row-gap: 24px;
+        height: 375px;
+    }
+
+    .artistModal-img-wrapper { 
+        flex: 0 0 50%; height: 100%; 
+    }
+
+    .artistModal-img { 
+        height: 100%; margin-bottom: 0; 
+    }
+
+    .artistModal-info-grid { 
+        flex: 1; display: 
+        flex; flex-direction: column; 
+        height: 100%; 
+        min-width: 0; 
+    }
+
+    .artistModal-desc { 
+        flex-grow: 1; 
+        overflow-y: auto; 
+        min-height: 0; 
+    }
+}

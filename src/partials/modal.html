@@ -1,3 +1,19 @@
-<section>
-    <h1>Modal</h1>
-</section>
+<div class="artistModal-overlay is-hidden" id="artist-modal-overlay">
+  
+  <div class="artistModal" id="artist-modal">
+
+    <button class="artistModal-close-btn" id="modal-close" aria-label="Close" type="button">
+      <svg class="artistModal-close-icon" width="32" height="32">
+        <use href="./img/sprite.svg#icon-exit"></use>
+      </svg>
+    </button>
+
+    <div class="artistModal-content" id="artist-modal-content">
+      
+      <div id="loader" class="loader is-hidden"></div>
+
+      <div class="artistModal-details" id="artist-details"></div>
+
+    </div>
+  </div>
+</div>
