@@ -1,19 +1,50 @@
-console.log('artists');
-
 import { getArtists } from './api';
+import { showPush } from './pushMessage';
 import { renderArtistCards } from './render-functions';
 
-const page = 1;
+const loadMore = document.querySelector('.artists-button');
+
+let page = 1;
 const limit = 8;
 
-// Розкоментувати щоб перевірити завантаження карток
-// async function loadArtists() {
-//   try {
-//     const { data } = await getArtists({ page, limit });
-//     renderArtistCards(data.artists);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+let artists = [];
+let totalArtists = 0;
 
-// loadArtists();
+function showLoadMoreBtn() {
+  loadMore.classList.remove('is-hidden');
+}
+
+function hideLoadMoreBtn() {
+  loadMore.classList.add('is-hidden');
+}
+
+async function loadArtists() {
+  const data = await getArtists({ page, limit });
+  if (!data) return;
+  totalArtists = data.totalArtists;
+  renderArtistCards(data.artists);
+  artists = [...artists, ...data.artists];
+  if (artists.length < totalArtists) {
+    showLoadMoreBtn();
+  } else {
+    hideLoadMoreBtn();
+  }
+}
+loadArtists();
+
+loadMore.addEventListener('click', loadMoreBtnHandler);
+
+async function loadMoreBtnHandler(e) {
+  e.preventDefault();
+  page += 1;
+  loadMore.disabled = true;
+  const data = await getArtists({ page, limit });
+  loadMore.disabled = false;
+  if (!data) return;
+  renderArtistCards(data.artists);
+  artists = [...artists, ...data.artists];
+  if (artists.length >= totalArtists) {
+    hideLoadMoreBtn();
+    showPush('You have reached the limit', 'error');
+  }
+}
