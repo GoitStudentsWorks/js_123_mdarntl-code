@@ -2,6 +2,9 @@
 // Давайте домовимось: вся генерація HTML-рядків живе тільки там. У файлах логіки (api, main) ми просто викликаємо ці функції.
 // Так ми не заплутаємось у коді і зможемо легко правити верстку, не ламаючи логіку JS."
 
+// Resolve sprite URL correctly for both dev and production
+const spriteUrl = new URL('../img/sprite.svg', import.meta.url).href;
+
 const artistsList = document.querySelector('.artists-list');
 
 //Функція рендеру карток артистів, потрібно передати масив списку артистів.
@@ -55,12 +58,12 @@ export function createAlbumsMarkup(albums) {
       </div>
       <ul class="artistModal-track-list">
         ${album.tracks.map(track => {
-          const totalSec = Math.floor(track.intDuration / 1000);
-          const m = Math.floor(totalSec / 60);
-          const s = String(totalSec % 60).padStart(2, '0');
-          const cleanLink = track.movie ? track.movie.split(' ')[0] : null;
-          
-          return `
+    const totalSec = Math.floor(track.intDuration / 1000);
+    const m = Math.floor(totalSec / 60);
+    const s = String(totalSec % 60).padStart(2, '0');
+    const cleanLink = track.movie ? track.movie.split(' ')[0] : null;
+
+    return `
             <li class="artistModal-track-item">
               <span class="artistModal-track-name">${track.strTrack}</span>
               <span class="artistModal-track-duration">${m}:${s}</span>
@@ -68,12 +71,12 @@ export function createAlbumsMarkup(albums) {
                 ${cleanLink && cleanLink !== "null" ? `
                   <a href="${cleanLink}" target="_blank" class="artistModal-yt-link" rel="noopener noreferrer">
                     <svg class="artistModal-yt-icon" width="24" height="24">
-                      <use href="/img/sprite.svg#icon-Youtube"></use> 
+                      <use href="${spriteUrl}#icon-Youtube"></use> 
                     </svg>
                   </a>` : ''}
               </span>
             </li>`;
-        }).join('')}
+  }).join('')}
       </ul>
     </div>`).join('');
 }
@@ -81,7 +84,7 @@ export function createAlbumsMarkup(albums) {
 // Функція рендеру модалки
 export function createArtistModalMarkup({ artist, yearsActive, specificInfoMarkup, albumsMarkup }) {
   const { strArtist, strArtistThumb, strCountry, strBiographyEN, genres } = artist;
-  
+
   return `
     <div class="artistModal-content-wrapper">
       <h2 class="artistModal-title">${strArtist}</h2>
