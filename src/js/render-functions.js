@@ -68,7 +68,7 @@ export function createAlbumsMarkup(albums) {
                 ${cleanLink && cleanLink !== "null" ? `
                   <a href="${cleanLink}" target="_blank" class="artistModal-yt-link" rel="noopener noreferrer">
                     <svg class="artistModal-yt-icon" width="24" height="24">
-                      <use href="/img/sprite.svg#icon-Youtube"></use> 
+                      <use href="./img/sprite.svg#icon-Youtube"></use> 
                     </svg>
                   </a>` : ''}
               </span>
