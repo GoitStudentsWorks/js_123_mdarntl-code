@@ -1,35 +1,29 @@
 <section class="feedback" id="feedback">
-  <h2 class="visually-hidden">Feedbacks our visitors</h2>
+  <h2 class="visually-hidden">Feedbacks</h2>
 
-  <div class="feedback-wrapper">
-    <button
-      class="feedback-btn feedback-btn-prev"
-      aria-label="Previous feedback"
-    >
-      ←
+  <div class="feedback-container">
+    <!-- Prev button -->
+    <button type="button" class="feedback-prev" aria-label="Previous feedback">
+      <svg class="feedback-svg" width="24" height="24">
+        <use href="./img/sprite.svg#icon-arrow-left"></use>
+      </svg>
     </button>
 
+    <!-- Swiper -->
     <div class="swiper feedback-swiper">
-      <div class="swiper-wrapper" id="feedbackList"></div>
+      <div class="swiper-wrapper" id="feedbackList">
+        <!-- JS will insert .swiper-slide here -->
+      </div>
     </div>
 
-    <button class="feedback-btn feedback-btn-next" aria-label="Next feedback">
-      →
+    <!-- Next button -->
+    <button type="button" class="feedback-next" aria-label="Next feedback">
+      <svg class="feedback-svg" width="24" height="24">
+        <use href="./img/sprite.svg#icon-arrow-left"></use>
+      </svg>
     </button>
   </div>
 
-  <div class="feedback-pagination">
-    <span class="pagination-dot" data-type="start"></span>
-    <span class="pagination-dot" data-type="middle"></span>
-    <span class="pagination-dot" data-type="end"></span>
-  </div>
+  <!-- Pagination dots -->
+  <div class="feedback-pagination"></div>
 </section>
-
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<script src="https://unpkg.com/raty-js@3.1.1/lib/jquery.raty.js"></script>
-
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-<script src="./feedback.js"></script>

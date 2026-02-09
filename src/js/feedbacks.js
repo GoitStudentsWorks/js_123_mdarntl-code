@@ -1,86 +1,99 @@
-import { getFeedbacks } from './api.js';
+import { getFeedbacks } from './api';
 
-const API_URL = '/feedbacks';
-const feedbackList = document.getElementById('feedbackList');
-const dots = document.querySelectorAll('.feedback-pagination .dot');
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
 
-let swiper;
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-async function fetchFeedbacks() {
-  const res = await fetch('https://sound-wave.b.goit.study/api/feedbacks');
-  const json = await res.json();
+const LIMIT = 3;
+let swiperInstance = null;
 
-  return json.data.slice(0, 10);
+async function loadFeedbackSlider() {
+
+  const response = await getFeedbacks(LIMIT);
+
+  // ❗❗❗ ВАЖЛИВО: масив лежить ТУТ
+  const feedbacks = response?.data;
+
+  console.log('[Feedback] extracted feedbacks:', feedbacks);
+  console.log('[Feedback] isArray:', Array.isArray(feedbacks));
+  console.log('[Feedback] length:', feedbacks?.length);
+
+  if (!Array.isArray(feedbacks) || feedbacks.length === 0) {
+    console.warn('[Feedback] feedbacks array is empty or invalid');
+    return;
+  }
+
+  renderFeedbackSlides(feedbacks);
+  initFeedbackSwiper();
 }
 
-function renderSlides(feedbacks) {
-  feedbackList.innerHTML = '';
+function renderFeedbackSlides(feedbacks) {
 
-  feedbacks.forEach(item => {
-    const rating = Math.round(item.rate ?? 5);
-    const text =
-      typeof item.comment === 'string' && item.comment.trim()
-        ? item.comment
-        : 'This user left a feedback about ArtistsHub.';
+  const wrapper = document.getElementById('feedbackList');
 
-    const name = item.user?.name || 'Anonymous';
+  if (!wrapper) return;
 
-    const slide = document.createElement('div');
-    slide.className = 'swiper-slide';
+  wrapper.innerHTML = '';
 
-    slide.innerHTML = `
-      <div class="feedback-card">
-        <div class="feedback-stars" data-score="${rating}"></div>
-        <p class="feedback-text">"${text}"</p>
-        <p class="feedback-author">${name}</p>
+  feedbacks.forEach((item, index) => {
+    console.log(`[Feedback] slide ${index}:`, item);
+
+    const { name, rating, descr } = item;
+
+    wrapper.insertAdjacentHTML(
+      'beforeend',
+      `
+      <div class="swiper-slide feedback-card">
+        <div class="feedback-rating">
+          ${renderStars(rating)}
+        </div>
+        <p class="feedback-text">"${descr}"</p>
+        <p class="feedback-author">— ${name}</p>
       </div>
-    `;
-
-    feedbackList.appendChild(slide);
-  });
-
-  initRatings();
-}
-
-function initRatings() {
-  document.querySelectorAll('.feedback-stars').forEach(el => {
-    $(el).raty({
-      score: el.dataset.score,
-      readOnly: true,
-      hints: false,
-      starType: 'i',
-    });
+      `
+    );
   });
 }
 
-function updatePagination(index, total) {
-  dots.forEach(dot => dot.classList.remove('active'));
+function renderStars(rating = 0) {
+  const rounded = Math.round(rating);
+  console.log('[Feedback] renderStars rating:', rating, 'rounded:', rounded);
 
-  if (index === 0) dots[0].classList.add('active');
-  else if (index === total - 1) dots[2].classList.add('active');
-  else dots[1].classList.add('active');
+  let stars = '';
+
+  for (let i = 1; i <= 5; i++) {
+    stars += `<span class="star ${i <= rounded ? 'active' : ''}">★</span>`;
+  }
+
+  return stars;
 }
 
-function initSwiper(total) {
-  swiper = new Swiper('.feedback-swiper', {
+function initFeedbackSwiper() {
+
+  if (swiperInstance) {
+    swiperInstance.destroy(true, true);
+  }
+
+  swiperInstance = new Swiper('.feedback-swiper', {
+    modules: [Navigation, Pagination],
     slidesPerView: 1,
-    speed: 600,
+    loop: true,
+    grabCursor: true,
+
     navigation: {
       nextEl: '.feedback-next',
       prevEl: '.feedback-prev',
     },
-    on: {
-      slideChange() {
-        updatePagination(this.activeIndex, total);
-      },
+
+    pagination: {
+      el: '.feedback-pagination',
+      clickable: true,
     },
   });
 
-  updatePagination(0, total);
 }
 
-(async function init() {
-  const feedbacks = await fetchFeedbacks();
-  renderSlides(feedbacks);
-  initSwiper(feedbacks.length);
-})();
+document.addEventListener('DOMContentLoaded', loadFeedbackSlider);
