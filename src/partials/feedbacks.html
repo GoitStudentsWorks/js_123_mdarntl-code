@@ -1,3 +1,35 @@
-<section>
-    <h1>Feedbacks</h1>
+<section class="feedback" id="feedback">
+  <h2 class="visually-hidden">Feedbacks our visitors</h2>
+
+  <div class="feedback-wrapper">
+    <button
+      class="feedback-btn feedback-btn-prev"
+      aria-label="Previous feedback"
+    >
+      ←
+    </button>
+
+    <div class="swiper feedback-swiper">
+      <div class="swiper-wrapper" id="feedbackList"></div>
+    </div>
+
+    <button class="feedback-btn feedback-btn-next" aria-label="Next feedback">
+      →
+    </button>
+  </div>
+
+  <div class="feedback-pagination">
+    <span class="pagination-dot" data-type="start"></span>
+    <span class="pagination-dot" data-type="middle"></span>
+    <span class="pagination-dot" data-type="end"></span>
+  </div>
 </section>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://unpkg.com/raty-js@3.1.1/lib/jquery.raty.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script src="./feedback.js"></script>
