@@ -15,8 +15,6 @@
 }
 
 .feedback-container {
-    max-width: 1320px;
-    margin: 0 auto;
     position: relative;
     display: flex;
     align-items: center;
