@@ -12,8 +12,6 @@ export function hideLoader() {
   loader.classList.add('is-hidden');
 }
 
-console.log('loader');
-
 // ЗАГАЛЬНИЙ ЛОАДЕР
 
 // const loader = document.getElementById('app-loader');

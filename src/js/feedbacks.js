@@ -17,12 +17,7 @@ async function loadFeedbackSlider() {
   // ❗❗❗ ВАЖЛИВО: масив лежить ТУТ
   const feedbacks = response?.data;
 
-  console.log('[Feedback] extracted feedbacks:', feedbacks);
-  console.log('[Feedback] isArray:', Array.isArray(feedbacks));
-  console.log('[Feedback] length:', feedbacks?.length);
-
   if (!Array.isArray(feedbacks) || feedbacks.length === 0) {
-    console.warn('[Feedback] feedbacks array is empty or invalid');
     return;
   }
 
@@ -39,7 +34,6 @@ function renderFeedbackSlides(feedbacks) {
   wrapper.innerHTML = '';
 
   feedbacks.forEach((item, index) => {
-    console.log(`[Feedback] slide ${index}:`, item);
 
     const { name, rating, descr } = item;
 
@@ -60,7 +54,6 @@ function renderFeedbackSlides(feedbacks) {
 
 function renderStars(rating = 0) {
   const rounded = Math.round(rating);
-  console.log('[Feedback] renderStars rating:', rating, 'rounded:', rounded);
 
   let stars = '';
 
@@ -98,4 +91,3 @@ function initFeedbackSwiper() {
 
 document.addEventListener('DOMContentLoaded', loadFeedbackSlider);
 // fix build update
-console.log('Update version');
