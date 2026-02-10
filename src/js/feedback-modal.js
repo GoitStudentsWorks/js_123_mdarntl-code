@@ -5,25 +5,25 @@ const form = document.querySelector('.feedback-form');
 const errorText = document.querySelector('.form-error');
 const ratingBlock = document.querySelector('[data-rating]');
 
-let selectedRating = 5;
-
+let selectedRating = 0;
 
 function openModal() {
   backdrop.classList.remove('is-hidden');
   document.body.classList.add('modal-open');
 
   form.reset();
-  selectedRating = 4;
+  selectedRating = 0;
   highlightStars(selectedRating);
   errorText.hidden = true;
 }
 
-
 function closeModal() {
   backdrop.classList.add('is-hidden');
   document.body.classList.remove('modal-open');
-}
 
+  // 🔹 FIX: прибираємо focus, щоб не лишався "hover-стан"
+  document.activeElement?.blur();
+}
 
 if (openBtn) {
   openBtn.addEventListener('click', openModal);
@@ -31,21 +31,17 @@ if (openBtn) {
 
 closeBtn.addEventListener('click', closeModal);
 
-
 backdrop.addEventListener('click', e => {
   if (e.target === backdrop) {
     closeModal();
   }
 });
 
-
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !backdrop.classList.contains('is-hidden')) {
     closeModal();
   }
 });
-
-
 
 if (ratingBlock) {
   ratingBlock.addEventListener('click', e => {
@@ -62,20 +58,42 @@ function highlightStars(value) {
   buttons.forEach(btn => {
     btn.classList.toggle(
       'is-active',
-            Number(btn.dataset.value) <= value
+      Number(btn.dataset.value) <= value
     );
   });
 }
 
+function validateFeedback({ name, message, rating }) {
+  if (!name || name.length < 2 || name.length > 16) {
+    return 'Name must be between 2 and 16 characters';
+  }
 
+  if (!message || message.length < 10 || message.length > 512) {
+    return 'Message must be between 10 and 512 characters';
+  }
+
+  if (!rating || rating < 1 || rating > 5) {
+    return 'Rating must be between 1 and 5';
+  }
+
+  return null;
+}
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
 
   const name = form.elements.name.value.trim();
   const message = form.elements.message.value.trim();
+  const rating = selectedRating;
 
-  if (!name || !message || !selectedRating) {
+  const validationError = validateFeedback({
+    name,
+    message,
+    rating,
+  });
+
+  if (validationError) {
+    errorText.textContent = validationError;
     errorText.hidden = false;
     return;
   }
@@ -84,8 +102,8 @@ form.addEventListener('submit', async e => {
 
   const feedbackData = {
     name,
-    message,
-    rating: selectedRating,
+    rating,
+    descr: message,
   };
 
   try {
