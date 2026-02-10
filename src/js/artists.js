@@ -38,7 +38,9 @@ async function loadMoreBtnHandler(e) {
   e.preventDefault();
   page += 1;
   loadMore.disabled = true;
+  loadMore.classList.add('loading'); // Show loader
   const data = await getArtists({ page, limit });
+  loadMore.classList.remove('loading'); // Hide loader
   loadMore.disabled = false;
   if (!data) return;
   renderArtistCards(data.artists);

@@ -1,4 +1,3 @@
-console.log('header');
 (function () {
   const btn = document.querySelector('.header-btn');
   const menu = document.querySelector('.header-menu');

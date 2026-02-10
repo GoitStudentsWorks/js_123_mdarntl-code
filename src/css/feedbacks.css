@@ -1,0 +1,137 @@
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.feedback {
+    background: radial-gradient(circle at center, #1a0b12 0%, #050204 70%);
+    background: #060307;
+    ;
+    font-family: Inter, sans-serif;
+    padding: 120px 0;
+}
+
+.feedback-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-prev,
+.feedback-next {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+    background: black;
+}
+
+.feedback-next .feedback-svg {
+    transform: rotate(180deg);
+}
+
+.feedback-svg {
+    fill: #ffffff;
+    stroke: none;
+    width: 24px;
+    height: 24px;
+}
+
+.feedback-swiper {
+    width: 100%;
+    max-width: 900px;
+    /* Keep 900px as it looked good, or maybe reduce if spacing needs to be huge? let's stick to 900 for now */
+    margin: 0 40px;
+    /* Increase margin to 40px to separate buttons more */
+    overflow: hidden;
+}
+
+.feedback-card {
+    text-align: center;
+    padding: 0 40px;
+}
+
+.feedback-stars {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
+.star {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.star.active {
+    color: #e0a3ff;
+}
+
+.feedback-text {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 20px;
+}
+
+.feedback-author {
+    font-size: 16px;
+    opacity: 0.6;
+    margin-top: 20px;
+}
+
+.feedback-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.feedback-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    opacity: 1;
+    margin: 0 6px !important;
+}
+
+.feedback-pagination .swiper-pagination-bullet-active {
+    background: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .feedback-swiper {
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 767px) {
+    .feedback-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .feedback-prev,
+    .feedback-next {
+        display: none;
+    }
+
+    .feedback-swiper {
+        margin: 0;
+        max-width: 100%;
+    }
+
+    .feedback-text {
+        font-size: 20px;
+    }
+}

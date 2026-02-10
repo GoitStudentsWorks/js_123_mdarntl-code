@@ -22,6 +22,7 @@
     "basiclightbox": "^5.0.4",
     "izitoast": "^1.4.0",
     "modern-normalize": "^3.0.1",
+    "raty-js": "^4.3.0",
     "star-rating.js": "^4.3.1",
     "swiper": "^12.1.0",
     "tui-pagination": "^3.4.1",

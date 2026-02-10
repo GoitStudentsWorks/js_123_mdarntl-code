@@ -1,3 +1,29 @@
-<section>
-    <h1>Feedbacks</h1>
+<section class="feedback" id="feedback">
+  <h2 class="visually-hidden">Feedbacks</h2>
+
+  <div class="feedback-container">
+    <!-- Prev button -->
+    <button type="button" class="feedback-prev" aria-label="Previous feedback">
+      <svg class="feedback-svg" width="24" height="24">
+        <use href="./img/sprite.svg#icon-arrow-left"></use>
+      </svg>
+    </button>
+
+    <!-- Swiper -->
+    <div class="swiper feedback-swiper">
+      <div class="swiper-wrapper" id="feedbackList">
+        <!-- JS will insert .swiper-slide here -->
+      </div>
+    </div>
+
+    <!-- Next button -->
+    <button type="button" class="feedback-next" aria-label="Next feedback">
+      <svg class="feedback-svg" width="24" height="24">
+        <use href="./img/sprite.svg#icon-arrow-left"></use>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Pagination dots -->
+  <div class="feedback-pagination"></div>
 </section>
