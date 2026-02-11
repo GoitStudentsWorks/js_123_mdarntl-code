@@ -1,3 +1,6 @@
+// Resolve sprite URL correctly for both dev and production (same as render-functions.js)
+const spriteBase = new URL('../img/sprite.svg', import.meta.url).href;
+
 (function () {
   const btn = document.querySelector('.header-btn');
   const menu = document.querySelector('.header-menu');
@@ -5,7 +8,6 @@
   if (!btn || !menu) return;
 
   const useEl = btn.querySelector('use');
-  const spriteBase = new URL('/src/img/sprite.svg', import.meta.url).href;
   const ICON_OPEN = '#icon-exit';
   const ICON_CLOSE = '#icon-menu-burger';
 
