@@ -43,7 +43,7 @@
   height: 1em;
   border-radius: 50%;
   position: relative;
-  animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+  animation: mltShdSpin 3.4s infinite ease, round 3.4s infinite ease;
 }
 
 @keyframes mltShdSpin {
