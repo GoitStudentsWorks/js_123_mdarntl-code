@@ -1,23 +1,48 @@
 .loader-wrapper {
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+  position: fixed;      /* Фіксуємо відносно вікна браузера */
+  top: 0;
+  left: 0;
+  width: 100vw;         /* 100% ширини вікна */
+  height: 100vh;        /* 100% висоти вікна */
+  
+  display: flex;        /* Вмикаємо Flexbox */
+  align-items: center;  /* Центрування по вертикалі */
+  justify-content: center; /* Центрування по горизонталі */
+  
+  background: rgba(6, 3, 7, 0.85); 
+  z-index: 99999;
+  
+  /* Додатковий захист від зсуву */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+.artistModal-overlay,
+.artists-section {
+    position: relative;
+}
+
+.artistModal-overlay .loader-wrapper,
+.artists-section .loader-wrapper {
+    position: absolute;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.is-hidden {
+    display: none;
+}
 .loader {
-  color: #ffffff;
+  display: block;
+  margin: 0 auto;
+  color: #764191; 
   font-size: 45px;
   text-indent: -9999em;
-  overflow: hidden;
   width: 1em;
   height: 1em;
   border-radius: 50%;
   position: relative;
-  transform: translateZ(0);
   animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
 }
 
