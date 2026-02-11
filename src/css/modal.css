@@ -52,6 +52,7 @@
     background: transparent;
     cursor: pointer;
     outline: none;
+    border-radius: 50%;
 }
 
 .artistModal-close-icon {
@@ -60,6 +61,7 @@
     height: 32px;
     fill: #fff;
     background: #060307;
+    border-radius: 50%;
 }
 
 .artistModal-content {
@@ -109,7 +111,7 @@
     text-transform: capitalize;
 }
 
-.artistModal-info-value, 
+.artistModal-info-value,
 .artistModal-desc p {
     font-family: "IBM Plex Sans", sans-serif;
     font-weight: 400;
@@ -156,7 +158,7 @@
 
 .artistModal-track-header {
     display: grid;
-    grid-template-columns: 1fr 45px 32px; 
+    grid-template-columns: 1fr 45px 32px;
     column-gap: 16px;
     align-items: center;
     padding: 4px 12px;
@@ -168,15 +170,15 @@
 
 .artistModal-track-header span:nth-child(2),
 .artistModal-track-header span:nth-child(3) {
-   grid-column: span 1;
-   text-align: center;
+    grid-column: span 1;
+    text-align: center;
 }
 
 .artistModal-track-header span:first-child,
 .artistModal-track-name {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
 
 .artistModal-track-item {
@@ -197,7 +199,7 @@
 }
 
 .artistModal-track-duration {
-    text-align: left; 
+    text-align: left;
     min-width: 40px;
 }
 
@@ -216,29 +218,29 @@
 
 
 @media only screen and (min-width: 768px) {
-    .artistModal-overlay { 
-        padding: 64px 32px; 
+    .artistModal-overlay {
+        padding: 64px 32px;
     }
 
-    .artistModal { 
-        max-width: 702px; 
+    .artistModal {
+        max-width: 702px;
     }
 
-    .artistModal::before { 
-        height: 64px; 
-    }
-    
-    .artistModal-content { 
-        padding: 64px 24px; 
+    .artistModal::before {
+        height: 64px;
     }
 
-    .artistModal-title { 
-        margin: 0 0 48px 0; 
-        font-size: 32px; 
+    .artistModal-content {
+        padding: 64px 24px;
     }
 
-    .artistModal-img { 
-        height: 402px; 
+    .artistModal-title {
+        margin: 0 0 48px 0;
+        font-size: 32px;
+    }
+
+    .artistModal-img {
+        height: 402px;
     }
 
     .artistModal-info-grid {
@@ -261,27 +263,28 @@
         row-gap: 32px;
     }
 
-    .artistModal-album-item { 
-        max-width: 100%; 
-        min-width: 272px; 
+    .artistModal-album-item {
+        max-width: 100%;
+        min-width: 272px;
     }
 
-    .artistModal-albums-title { 
-        margin: 48px 0 16px 0; 
+    .artistModal-albums-title {
+        margin: 48px 0 16px 0;
     }
 }
 
 
 @media only screen and (min-width: 1440px) {
-    .artistModal { 
-        max-width: 1312px; 
+    .artistModal {
+        max-width: 1312px;
     }
 
-    .artistModal-content { 
-        padding: 64px 64px; 
+    .artistModal-content {
+        padding: 64px 64px;
     }
 
-    .artistModal-albums-section { grid-template-columns: repeat(4, 1fr); 
+    .artistModal-albums-section {
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .artistModal-info-wrapper {
@@ -291,24 +294,56 @@
         height: 375px;
     }
 
-    .artistModal-img-wrapper { 
-        flex: 0 0 50%; height: 100%; 
+    .artistModal-img-wrapper {
+        flex: 0 0 50%;
+        height: 100%;
     }
 
-    .artistModal-img { 
-        height: 100%; margin-bottom: 0; 
+    .artistModal-img {
+        height: 100%;
+        margin-bottom: 0;
     }
 
-    .artistModal-info-grid { 
-        flex: 1; display: 
-        flex; flex-direction: column; 
-        height: 100%; 
-        min-width: 0; 
+    .artistModal-info-grid {
+        flex: 1;
+        display:
+            flex;
+        flex-direction: column;
+        height: 100%;
+        min-width: 0;
     }
 
-    .artistModal-desc { 
-        flex-grow: 1; 
-        overflow-y: auto; 
-        min-height: 0; 
+    .artistModal-desc {
+        flex-grow: 1;
+        overflow-y: auto;
+        min-height: 0;
     }
+}
+
+/* Custom scrollbar styles */
+.artistModal-content::-webkit-scrollbar,
+.artistModal-desc::-webkit-scrollbar {
+    width: 6px;
+}
+
+.artistModal-content::-webkit-scrollbar-track,
+.artistModal-desc::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.artistModal-content::-webkit-scrollbar-thumb,
+.artistModal-desc::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.artistModal-content::-webkit-scrollbar-thumb:hover,
+.artistModal-desc::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.artistModal-content,
+.artistModal-desc {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }

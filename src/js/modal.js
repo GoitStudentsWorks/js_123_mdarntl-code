@@ -20,11 +20,11 @@ async function onArtistCardClick(e) {
 }
 
 async function openModal(id) {
-  toggleModal(); 
+  toggleModal();
   addModalListeners();
   showLoader();
-  
-  refs.detailsContainer.innerHTML = ''; 
+
+  refs.detailsContainer.innerHTML = '';
 
   try {
     const artistData = await getArtistById(id);
@@ -33,7 +33,7 @@ async function openModal(id) {
     const allTracks = artistData.tracksList || [];
     const albumsMap = {};
 
-    allTracks.forEach(function(track) {
+    allTracks.forEach(function (track) {
       const albumName = track.strAlbum || "Other Tracks";
       if (!albumsMap[albumName]) {
         albumsMap[albumName] = { strAlbum: albumName, tracks: [] };
@@ -53,17 +53,17 @@ async function openModal(id) {
 }
 
 function renderModalContent(artist, albums) {
-  const { 
-    strArtist, 
-    strArtistThumb, 
-    intFormedYear, 
-    intBornYear, 
-    intDiedYear, 
-    strCountry, 
+  const {
+    strArtist,
+    strArtistThumb,
+    intFormedYear,
+    intBornYear,
+    intDiedYear,
+    strCountry,
     strBiographyEN,
-    strGender,    
-    intMembers,   
-    genres        
+    strGender,
+    intMembers,
+    genres
   } = artist;
 
   let yearsActive = "information missing";
@@ -74,9 +74,9 @@ function renderModalContent(artist, albums) {
     const endYear = hasFinished ? intDiedYear : "present";
     yearsActive = `${startYear} – ${endYear}`;
   }
-  
+
   const isGroup = intMembers && parseInt(intMembers) > 1;
-  const specificInfoMarkup = isGroup 
+  const specificInfoMarkup = isGroup
     ? `<div class="artistModal-info-item">
          <span class="artistModal-info-label">Members</span>
          <p class="artistModal-info-value">${intMembers}</p>
@@ -109,22 +109,22 @@ function closeModal() {
   removeModalListeners();
 }
 
-function onEscKeydown(e) { 
-  if (e.code === 'Escape') closeModal(); 
+function onEscKeydown(e) {
+  if (e.code === 'Escape') closeModal();
 }
 
-function onBackdropClick(e) { 
-  if (e.target === refs.overlay) closeModal(); 
+function onBackdropClick(e) {
+  if (e.target === refs.overlay) closeModal();
 }
 
 function addModalListeners() {
   refs.closeBtn?.addEventListener('click', closeModal);
   refs.overlay?.addEventListener('click', onBackdropClick);
-  window.addEventListener('keyup', onEscKeydown);
+  window.addEventListener('keydown', onEscKeydown);
 }
 
 function removeModalListeners() {
   refs.closeBtn?.removeEventListener('click', closeModal);
   refs.overlay?.removeEventListener('click', onBackdropClick);
-  window.removeEventListener('keyup', onEscKeydown);
+  window.removeEventListener('keydown', onEscKeydown);
 }

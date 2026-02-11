@@ -95,9 +95,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .container {
-    padding: 0px 64px 0px 64px;
-  }
+
 
   .header-btn {
     display: none;
