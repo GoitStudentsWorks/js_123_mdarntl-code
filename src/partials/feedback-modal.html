@@ -1,0 +1,45 @@
+<section class="feedbacks">
+    <div class="container">
+
+
+    </div>
+
+    <div class="backdrop is-hidden" data-feedback-backdrop>
+        <div class="modal">
+            <button class="modal-close" type="button" data-feedback-close aria-label="Close modal">
+                ✕
+            </button>
+
+            <h2 class="modal-title">Submit feedback</h2>
+
+            <form class="feedback-form" novalidate>
+                <label class="form-field">
+                    <span>Name</span>
+                    <input type="text" name="name" placeholder="Your name" required />
+                </label>
+
+                <label class="form-field">
+                    <span>Message</span>
+                    <textarea name="message" placeholder="Your message" required></textarea>
+                </label>
+
+                <div class="form-field">
+                    <span>Rating</span>
+                    <div class="rating" data-rating>
+                        <button type="button" data-value="1">★</button>
+                        <button type="button" data-value="2">★</button>
+                        <button type="button" data-value="3">★</button>
+                        <button type="button" data-value="4">★</button>
+                        <button type="button" data-value="5">★</button>
+                    </div>
+                </div>
+
+                <p class="form-error" hidden>
+                    Please fill all fields
+                </p>
+
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+</section>
