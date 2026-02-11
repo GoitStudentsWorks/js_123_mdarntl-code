@@ -5,9 +5,7 @@
   if (!btn || !menu) return;
 
   const useEl = btn.querySelector('use');
-  /* const spriteBase = './img/sprite.svg'; */
-  /* const spriteBase = new URL('../img/sprite.svg', import.meta.url).href; */
-  const spriteBase = '/img/sprite.svg';
+  const spriteBase = new URL('../src/img/sprite.svg', import.meta.url).href;
   const ICON_OPEN = '#icon-exit';
   const ICON_CLOSE = '#icon-menu-burger';
 
