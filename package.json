@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
-    "build": "vite build --base=/team-5-project/",
+    "build": "vite build --base=/js_123_mdarntl-code/",
     "preview": "vite preview"
   },
   "devDependencies": {
